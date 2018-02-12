@@ -23,26 +23,33 @@ public class ValueFetcher extends Task<Integer> {
     public SimpleDoubleProperty valueBike3 = new SimpleDoubleProperty(0);
     public SimpleDoubleProperty valueBike4 = new SimpleDoubleProperty(0);
     public SimpleDoubleProperty valueBike5 = new SimpleDoubleProperty(0);
+    public SimpleDoubleProperty valueTotal = new SimpleDoubleProperty(0);
     public SimpleDoubleProperty sumBike1 = new SimpleDoubleProperty(0);
     public SimpleDoubleProperty sumBike2 = new SimpleDoubleProperty(0);
     public SimpleDoubleProperty sumBike3 = new SimpleDoubleProperty(0);
     public SimpleDoubleProperty sumBike4 = new SimpleDoubleProperty(0);
     public SimpleDoubleProperty sumBike5 = new SimpleDoubleProperty(0);
+    public SimpleDoubleProperty sumTotal = new SimpleDoubleProperty(0);
 
-    private SimpleDoubleProperty[] bikeValues = new SimpleDoubleProperty[]{
+    private double[] bikeValues = new double[6];
+    private double[] sumValues = new double[6];
+
+    private SimpleDoubleProperty[] boundBikeValues = new SimpleDoubleProperty[]{
             valueBike1,
             valueBike2,
             valueBike3,
             valueBike4,
-            valueBike5
+            valueBike5,
+            valueTotal
     };
 
-    private SimpleDoubleProperty[] sumValues = new SimpleDoubleProperty[]{
+    private SimpleDoubleProperty[] boundSumValues = new SimpleDoubleProperty[]{
             sumBike1,
             sumBike2,
             sumBike3,
             sumBike4,
-            sumBike5
+            sumBike5,
+            sumTotal
     };
 
     private int baudRate;
@@ -106,9 +113,12 @@ public class ValueFetcher extends Task<Integer> {
 
                     try {
                         int index = sensorId - 1;
-                        double previousSumValue = sumValues[index].get();
-                        Platform.runLater(() -> bikeValues[index].set(wgen));
-                        Platform.runLater(() -> sumValues[index].set(previousSumValue + wgen));
+                        bikeValues[index] = wgen;
+                        sumValues[index] += wgen;
+                        updateBoundValues(index);
+                        bikeValues[5] = bikeValues[0] + bikeValues[1] + bikeValues[2] + bikeValues[3] + bikeValues[4];
+                        sumValues[5] = sumValues[0] + sumValues[1] + sumValues[2] + sumValues[3] + sumValues[4];
+                        updateBoundValues(5);
                     } catch (Exception e) {
                         System.out.println(String.format(
                                 "Failed: %d\t%d\t%f\t%f\t%f\n", networkId, sensorId, vgen, igen, wgen) + e.getMessage()
@@ -203,12 +213,24 @@ public class ValueFetcher extends Task<Integer> {
     }
 
     public void resetBike(int bike) {
-        if (bike < 1 || bike > 5) {
+        if (bike < 1 || bike > 6) {
             System.out.println("WTF - Reseting bike " + bike + "?");
             return;
         }
         int index = bike - 1;
-        Platform.runLater(() -> bikeValues[index].set(0));
-        Platform.runLater(() -> sumValues[index].set(0));
+        bikeValues[index] = 0;
+        sumValues[index] = 0;
+        updateBoundValues(index);
+    }
+
+    private void updateBoundValues(int index) {
+        Platform.runLater(() -> boundBikeValues[index].set(bikeValues[index]));
+        Platform.runLater(() -> boundSumValues[index].set(sumValues[index]));
+    }
+
+    public void resetAll() {
+        for (int i = 1; i < 7; i++) {
+            resetBike(i);
+        }
     }
 }

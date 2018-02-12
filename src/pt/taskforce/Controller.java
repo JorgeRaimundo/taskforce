@@ -25,6 +25,8 @@ public class Controller implements Initializable{
     @FXML
     public Gauge gauge5;
     @FXML
+    public Gauge gaugeTotal;
+    @FXML
     public Label rxLabel;
     @FXML
     public Label label1;
@@ -36,6 +38,8 @@ public class Controller implements Initializable{
     public Label label4;
     @FXML
     public Label label5;
+    @FXML
+    public Label labelTotal;
 
     private ValueFetcher fetcher;
 
@@ -48,6 +52,7 @@ public class Controller implements Initializable{
         WattGaugeConfiguration wattGaugeConfiguration = new WattGaugeConfiguration();
         //VoltGaugeConfiguration voltGaugeConfiguration = new VoltGaugeConfiguration();
         //AmpGaugeConfiguration ampGaugeConfiguration = new AmpGaugeConfiguration();
+        TotalGaugeConfiguration totalGaugeConfiguration = new TotalGaugeConfiguration();
 
         rxLabel.visibleProperty().bind(fetcher.rxMissing);
         gauge1.valueProperty().bind(fetcher.valueBike1);
@@ -75,6 +80,11 @@ public class Controller implements Initializable{
 
         label5.textProperty().bind(fetcher.sumBike5.asString("%.2f Wh"));
 
+        gaugeTotal.valueProperty().bind(fetcher.valueTotal);
+        styleGauge(gaugeTotal, Color.rgb(255,255,255), totalGaugeConfiguration);
+
+        labelTotal.textProperty().bind(fetcher.sumTotal.asString("%.2f Wh"));
+
         new Thread(fetcher).start();
     }
 
@@ -88,7 +98,14 @@ public class Controller implements Initializable{
         gauge.setBarColor(color);
         gauge.setInteractive(true);
         EventHandler<Gauge.ButtonEvent> buttonEventEventHandler = event -> {
-            Matcher bikeMatcher = bikePattern.matcher(((Gauge) event.getTarget()).getTitle());
+            String gaugeTitle = ((Gauge) event.getTarget()).getTitle();
+
+            if (gaugeTitle.equals("Total")) {
+                fetcher.resetAll();
+                return;
+            }
+
+            Matcher bikeMatcher = bikePattern.matcher(gaugeTitle);
             bikeMatcher.find();
             fetcher.resetBike(Integer.parseInt(bikeMatcher.group("bikeNum")));
         };

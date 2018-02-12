@@ -85,4 +85,17 @@
             <padding><Insets bottom="10"/></padding>
         </Label>
     </VBox>
+
+    <VBox GridPane.rowIndex ="3"  GridPane.columnIndex="3" spacing="3" alignment="CENTER">
+        <Rectangle width="200" height="3" arcWidth="6" arcHeight="6" fill="#AAAAAA"/>
+        <Label alignment="CENTER" textFill="#AAAAAA">TOTAL
+            <padding><Insets bottom="10"/></padding>
+        </Label>
+        <Gauge GridPane.rowIndex="1" fx:id="gaugeTotal" title="Total">
+            <padding><Insets bottom="10"/></padding>
+        </Gauge>
+        <Label fx:id="labelTotal" alignment="CENTER" textFill="#AAAAAA" text="0 Wh">
+            <padding><Insets bottom="10"/></padding>
+        </Label>
+    </VBox>
 </GridPane>
