@@ -12,16 +12,7 @@
           alignment="center" hgap="25" vgap="25">
     <padding><Insets top="25" right="25" bottom="25" left="25"/></padding>
 
-    <Label fx:id="rxLabel" GridPane.rowIndex ="1" GridPane.columnIndex="1" alignment="CENTER"
-           textAlignment="CENTER" textFill="brown">Rx Disconnected
-        <padding><Insets bottom="25"/></padding>
-    </Label>
-
-    <Label GridPane.rowIndex ="1" GridPane.columnIndex="3" alignment="CENTER" text="Taskforce" textAlignment="CENTER">
-        <padding><Insets bottom="25"/></padding>
-    </Label>
-
-    <VBox GridPane.rowIndex ="2"  GridPane.columnIndex ="1" spacing="3" alignment="CENTER">
+    <VBox GridPane.rowIndex ="1"  GridPane.columnIndex ="1" spacing="3" alignment="CENTER">
         <Rectangle width="200" height="3" arcWidth="6" arcHeight="6" fill="#4dd0e1"/>
         <Label alignment="CENTER" textFill="#4dd0e1">BIKE 1
             <padding><Insets bottom="10"/></padding>
@@ -34,7 +25,7 @@
         </Label>
     </VBox>
 
-    <VBox GridPane.rowIndex ="2"  GridPane.columnIndex="2" spacing="3" alignment="CENTER">
+    <VBox GridPane.rowIndex ="1"  GridPane.columnIndex="2" spacing="3" alignment="CENTER">
         <Rectangle width="200" height="3" arcWidth="6" arcHeight="6" fill="#ffb74d"/>
         <Label alignment="CENTER" textFill="#ffb74d">BIKE 2
             <padding><Insets bottom="10"/></padding>
@@ -47,7 +38,7 @@
         </Label>
     </VBox>
 
-    <VBox GridPane.rowIndex ="2"  GridPane.columnIndex="3" spacing="3" alignment="CENTER">
+    <VBox GridPane.rowIndex ="1"  GridPane.columnIndex="3" spacing="3" alignment="CENTER">
         <Rectangle width="200" height="3" arcWidth="6" arcHeight="6" fill="#81c784"/>
         <Label alignment="CENTER" textFill="#81c784">BIKE 3
             <padding><Insets bottom="10"/></padding>
@@ -60,7 +51,7 @@
         </Label>
     </VBox>
 
-    <VBox GridPane.rowIndex ="2"  GridPane.columnIndex="4" spacing="3" alignment="CENTER">
+    <VBox GridPane.rowIndex ="1"  GridPane.columnIndex="4" spacing="3" alignment="CENTER">
         <Rectangle width="200" height="3" arcWidth="6" arcHeight="6" fill="#9575cd"/>
         <Label alignment="CENTER" textFill="#9575cd">BIKE 4
             <padding><Insets bottom="10"/></padding>
@@ -73,7 +64,7 @@
         </Label>
     </VBox>
 
-    <VBox GridPane.rowIndex ="2"  GridPane.columnIndex="5" spacing="3" alignment="CENTER">
+    <VBox GridPane.rowIndex ="1"  GridPane.columnIndex="5" spacing="3" alignment="CENTER">
         <Rectangle width="200" height="3" arcWidth="6" arcHeight="6" fill="#e57373"/>
         <Label alignment="CENTER" textFill="#e57373">BIKE 5
             <padding><Insets bottom="10"/></padding>
@@ -86,7 +77,12 @@
         </Label>
     </VBox>
 
-    <VBox GridPane.rowIndex ="3"  GridPane.columnIndex="3" spacing="3" alignment="CENTER">
+    <Label fx:id="rxLabel" GridPane.rowIndex ="2" GridPane.columnIndex="1" alignment="CENTER"
+           textAlignment="CENTER" textFill="brown">Rx Disconnected
+        <padding><Insets bottom="25"/></padding>
+    </Label>
+
+    <VBox GridPane.rowIndex ="2"  GridPane.columnIndex="3" spacing="3" alignment="CENTER">
         <Rectangle width="200" height="3" arcWidth="6" arcHeight="6" fill="#AAAAAA"/>
         <Label alignment="CENTER" textFill="#AAAAAA">TOTAL
             <padding><Insets bottom="10"/></padding>
