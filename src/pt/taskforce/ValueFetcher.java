@@ -3,7 +3,6 @@ package pt.taskforce;
 import javafx.application.Platform;
 import javafx.beans.property.SimpleBooleanProperty;
 import javafx.beans.property.SimpleDoubleProperty;
-import javafx.beans.property.SimpleStringProperty;
 import javafx.concurrent.Task;
 
 import com.fazecast.jSerialComm.*;
@@ -29,6 +28,22 @@ public class ValueFetcher extends Task<Integer> {
     public SimpleDoubleProperty sumBike3 = new SimpleDoubleProperty(0);
     public SimpleDoubleProperty sumBike4 = new SimpleDoubleProperty(0);
     public SimpleDoubleProperty sumBike5 = new SimpleDoubleProperty(0);
+
+    private SimpleDoubleProperty[] bikeValues = new SimpleDoubleProperty[]{
+            valueBike1,
+            valueBike2,
+            valueBike3,
+            valueBike4,
+            valueBike5
+    };
+
+    private SimpleDoubleProperty[] sumValues = new SimpleDoubleProperty[]{
+            sumBike1,
+            sumBike2,
+            sumBike3,
+            sumBike4,
+            sumBike5
+    };
 
     private int baudRate;
     private int dataBits;
@@ -56,22 +71,6 @@ public class ValueFetcher extends Task<Integer> {
         while (!exit) {
 
             SerialPort comPort = connect();
-
-            SimpleDoubleProperty[] bikeValues = new SimpleDoubleProperty[]{
-                valueBike1,
-                valueBike2,
-                valueBike3,
-                valueBike4,
-                valueBike5
-            };
-
-            SimpleDoubleProperty[] sumValues = new SimpleDoubleProperty[]{
-                sumBike1,
-                sumBike2,
-                sumBike3,
-                sumBike4,
-                sumBike5
-            };
 
             InputStream in = getInputStream(comPort);
 
@@ -201,5 +200,15 @@ public class ValueFetcher extends Task<Integer> {
 
     public void stop(){
         exit = true;
+    }
+
+    public void resetBike(int bike) {
+        if (bike < 1 || bike > 5) {
+            System.out.println("WTF - Reseting bike " + bike + "?");
+            return;
+        }
+        int index = bike - 1;
+        Platform.runLater(() -> bikeValues[index].set(0));
+        Platform.runLater(() -> sumValues[index].set(0));
     }
 }

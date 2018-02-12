@@ -1,6 +1,7 @@
 package pt.taskforce;
 
 import eu.hansolo.medusa.Gauge;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
@@ -8,6 +9,8 @@ import javafx.scene.paint.Color;
 
 import java.net.URL;
 import java.util.ResourceBundle;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class Controller implements Initializable{
 
@@ -35,6 +38,8 @@ public class Controller implements Initializable{
     public Label label5;
 
     private ValueFetcher fetcher;
+
+    private Pattern bikePattern = Pattern.compile("^Bike (?<bikeNum>\\d+)$");
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -81,6 +86,13 @@ public class Controller implements Initializable{
         gauge.setSkinType(Gauge.SkinType.MODERN);
         gauge.setUnit(gaugeConfiguration.unit);
         gauge.setBarColor(color);
+        gauge.setInteractive(true);
+        EventHandler<Gauge.ButtonEvent> buttonEventEventHandler = event -> {
+            Matcher bikeMatcher = bikePattern.matcher(((Gauge) event.getTarget()).getTitle());
+            bikeMatcher.find();
+            fetcher.resetBike(Integer.parseInt(bikeMatcher.group("bikeNum")));
+        };
+        gauge.setOnButtonPressed(buttonEventEventHandler);
     }
 
     public void stop() {
