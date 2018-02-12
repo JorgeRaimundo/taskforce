@@ -9,6 +9,10 @@ import com.fazecast.jSerialComm.*;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.logging.FileHandler;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import java.util.logging.SimpleFormatter;
 
 public class ValueFetcher extends Task<Integer> {
 
@@ -61,6 +65,11 @@ public class ValueFetcher extends Task<Integer> {
     private String comString;
     private String portString;
 
+    private boolean loggingEnabled;
+    private String logFile;
+    private final static Logger logger = Logger.getLogger(ValueFetcher.class.getName());
+    private static FileHandler fh = null;
+
     ValueFetcher() {
         PropertiesLoader properties = PropertiesLoader.getInstance();
 
@@ -71,6 +80,19 @@ public class ValueFetcher extends Task<Integer> {
         this.hwFlowCtrl = properties.getIntProperty("hwFlowCtrl");
         this.comString = properties.getProperty("comString");
         this.portString = properties.getProperty("portString");
+        loggingEnabled = Boolean.parseBoolean(properties.getProperty("app.logging"));
+        logFile = properties.getProperty("app.logFile");
+
+        if (loggingEnabled) {
+            try {
+                fh = new FileHandler(logFile, false);
+            } catch (SecurityException | IOException e) {
+                e.printStackTrace();
+            }
+            fh.setFormatter(new SimpleFormatter());
+            logger.addHandler(fh);
+            logger.setLevel(Level.CONFIG);
+        }
     }
 
     @Override
@@ -82,14 +104,14 @@ public class ValueFetcher extends Task<Integer> {
             InputStream in = getInputStream(comPort);
 
             try {
-                System.out.print("Network id\tSensor id\tVgen\tIgen\tWgen\n");
+                log("Network id\tSensor id\tVgen\tIgen\tWgen\n");
 
                 while (!exit) {
                     int networkId = (byte) in.read();
                     int sensorId = (byte) in.read();
 
                     if (networkId != 1 || sensorId < 1 || sensorId > 5) {
-                        System.out.println("Lost packet synch. Trying from another starting point");
+                        log("Lost packet synch. Trying from another starting point");
                         continue;
                     }
 
@@ -109,7 +131,7 @@ public class ValueFetcher extends Task<Integer> {
 
                     double wgen = vgen * igen;
 
-                    System.out.print(String.format("%d\t%d\t%f\t%f\t%f\n", networkId, sensorId, vgen, igen, wgen));
+                    log(String.format("%d\t%d\t%f\t%f\t%f\n", networkId, sensorId, vgen, igen, wgen));
 
                     try {
                         int index = sensorId - 1;
@@ -120,7 +142,7 @@ public class ValueFetcher extends Task<Integer> {
                         sumValues[5] = sumValues[0] + sumValues[1] + sumValues[2] + sumValues[3] + sumValues[4];
                         updateBoundValues(5);
                     } catch (Exception e) {
-                        System.out.println(String.format(
+                        log(String.format(
                                 "Failed: %d\t%d\t%f\t%f\t%f\n", networkId, sensorId, vgen, igen, wgen) + e.getMessage()
                         );
                     }
@@ -154,10 +176,10 @@ public class ValueFetcher extends Task<Integer> {
                 }
             }
 
-            System.out.println("Could not find Rx");
+            log("Could not find Rx");
         }
 
-        System.out.println("Rx Connected");
+        log("Rx Connected");
         rxMissing.set(false);
 
         comPort.setBaudRate(baudRate);
@@ -179,7 +201,7 @@ public class ValueFetcher extends Task<Integer> {
 
         while (in == null) {
             sleep(1000);
-            System.out.println("Could not get input from RX!\nIs it already connected to something else?");
+            log("Could not get input from RX!\nIs it already connected to something else?");
             in = comPort.getInputStream();
         }
 
@@ -187,7 +209,7 @@ public class ValueFetcher extends Task<Integer> {
             int i = 0;
             while (in.available() != 0) {
                 if (i % 10 == 0) {
-                    System.out.println("Flushing the input");
+                    log("Flushing the input");
                 }
                 in.read();
 
@@ -214,7 +236,7 @@ public class ValueFetcher extends Task<Integer> {
 
     public void resetBike(int bike) {
         if (bike < 1 || bike > 6) {
-            System.out.println("WTF - Reseting bike " + bike + "?");
+            log("WTF - Reseting bike " + bike + "?");
             return;
         }
         int index = bike - 1;
@@ -231,6 +253,12 @@ public class ValueFetcher extends Task<Integer> {
     public void resetAll() {
         for (int i = 1; i < 7; i++) {
             resetBike(i);
+        }
+    }
+
+    private void log(String message) {
+        if (loggingEnabled) {
+            logger.config(message);
         }
     }
 }
