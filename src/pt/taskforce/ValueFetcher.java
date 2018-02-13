@@ -170,7 +170,14 @@ public class ValueFetcher extends Task<Integer> {
 
             SerialPort[] comPorts = SerialPort.getCommPorts();
             for (SerialPort comPortI : comPorts) {
-                if (comPortI.getSystemPortName().equals(comString) && comPortI.getDescriptivePortName().equals(portString)) {
+                String systemPortName = comPortI.getSystemPortName();
+                String descriptivePortName = comPortI.getDescriptivePortName();
+                System.out.println(String.format(
+                    "Detected board: comString -> %s portString -> %s",
+                    systemPortName,
+                    descriptivePortName
+                ));
+                if (systemPortName.equals(comString) && descriptivePortName.equals(portString)) {
                     comPort = comPortI;
                     break;
                 }
