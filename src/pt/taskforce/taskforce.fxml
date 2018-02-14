@@ -14,10 +14,10 @@
 
     <VBox GridPane.rowIndex ="1"  GridPane.columnIndex ="1" spacing="3" alignment="CENTER">
         <Rectangle width="200" height="3" arcWidth="6" arcHeight="6" fill="#4dd0e1"/>
-        <Label alignment="CENTER" textFill="#4dd0e1">BIKE 1
+        <Label alignment="CENTER" textFill="#4dd0e1">BICICLETA 1
             <padding><Insets bottom="10"/></padding>
         </Label>
-        <Gauge GridPane.rowIndex="1" fx:id="gauge1" title="Bike 1">
+        <Gauge GridPane.rowIndex="1" fx:id="gauge1" title="Bicicleta 1">
             <padding><Insets bottom="10"/></padding>
         </Gauge>
         <Label fx:id="label1" alignment="CENTER" textFill="#ffb74d" text="0 Wh">
@@ -27,10 +27,10 @@
 
     <VBox GridPane.rowIndex ="1"  GridPane.columnIndex="2" spacing="3" alignment="CENTER">
         <Rectangle width="200" height="3" arcWidth="6" arcHeight="6" fill="#ffb74d"/>
-        <Label alignment="CENTER" textFill="#ffb74d">BIKE 2
+        <Label alignment="CENTER" textFill="#ffb74d">BICICLETA 2
             <padding><Insets bottom="10"/></padding>
         </Label>
-        <Gauge GridPane.rowIndex="1" fx:id="gauge2" title="Bike 2">
+        <Gauge GridPane.rowIndex="1" fx:id="gauge2" title="Bicicleta 2">
             <padding><Insets bottom="10"/></padding>
         </Gauge>
         <Label fx:id="label2" alignment="CENTER" textFill="#ffb74d" text="0 Wh">
@@ -40,10 +40,10 @@
 
     <VBox GridPane.rowIndex ="1"  GridPane.columnIndex="3" spacing="3" alignment="CENTER">
         <Rectangle width="200" height="3" arcWidth="6" arcHeight="6" fill="#81c784"/>
-        <Label alignment="CENTER" textFill="#81c784">BIKE 3
+        <Label alignment="CENTER" textFill="#81c784">BICICLETA 3
             <padding><Insets bottom="10"/></padding>
         </Label>
-        <Gauge GridPane.rowIndex="1" fx:id="gauge3" title="Bike 3">
+        <Gauge GridPane.rowIndex="1" fx:id="gauge3" title="Bicicleta 3">
             <padding><Insets bottom="10"/></padding>
         </Gauge>
         <Label fx:id="label3" alignment="CENTER" textFill="#ffb74d" text="0 Wh">
@@ -53,10 +53,10 @@
 
     <VBox GridPane.rowIndex ="1"  GridPane.columnIndex="4" spacing="3" alignment="CENTER">
         <Rectangle width="200" height="3" arcWidth="6" arcHeight="6" fill="#9575cd"/>
-        <Label alignment="CENTER" textFill="#9575cd">BIKE 4
+        <Label alignment="CENTER" textFill="#9575cd">BICICLETA 4
             <padding><Insets bottom="10"/></padding>
         </Label>
-        <Gauge GridPane.rowIndex="1" fx:id="gauge4" title="Bike 4">
+        <Gauge GridPane.rowIndex="1" fx:id="gauge4" title="Bicicleta 4">
             <padding><Insets bottom="10"/></padding>
         </Gauge>
         <Label fx:id="label4" alignment="CENTER" textFill="#ffb74d" text="0 Wh">
@@ -66,10 +66,10 @@
 
     <VBox GridPane.rowIndex ="1"  GridPane.columnIndex="5" spacing="3" alignment="CENTER">
         <Rectangle width="200" height="3" arcWidth="6" arcHeight="6" fill="#e57373"/>
-        <Label alignment="CENTER" textFill="#e57373">BIKE 5
+        <Label alignment="CENTER" textFill="#e57373">BICICLETA 5
             <padding><Insets bottom="10"/></padding>
         </Label>
-        <Gauge GridPane.rowIndex="1" fx:id="gauge5" title="Bike 5">
+        <Gauge GridPane.rowIndex="1" fx:id="gauge5" title="Bicicleta 5">
             <padding><Insets bottom="10"/></padding>
         </Gauge>
         <Label fx:id="label5" alignment="CENTER" textFill="#ffb74d" text="0 Wh">

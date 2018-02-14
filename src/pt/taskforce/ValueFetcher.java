@@ -66,7 +66,6 @@ public class ValueFetcher extends Task<Integer> {
     private String portString;
 
     private boolean loggingEnabled;
-    private String logFile;
     private final static Logger logger = Logger.getLogger(ValueFetcher.class.getName());
     private static FileHandler fh = null;
 
@@ -81,7 +80,7 @@ public class ValueFetcher extends Task<Integer> {
         this.comString = properties.getProperty("comString");
         this.portString = properties.getProperty("portString");
         loggingEnabled = Boolean.parseBoolean(properties.getProperty("app.logging"));
-        logFile = properties.getProperty("app.logFile");
+        String logFile = properties.getProperty("app.logFile");
 
         if (loggingEnabled) {
             try {
@@ -133,11 +132,16 @@ public class ValueFetcher extends Task<Integer> {
 
                     log(String.format("%d\t%d\t%f\t%f\t%f\n", networkId, sensorId, vgen, igen, wgen));
 
+                    if (wgen < 0.4) { // wgen < 0.4 is just noise
+                        wgen = 0;
+                    }
+
+                    int bikeIndex = sensorId - 1;
+
                     try {
-                        int index = sensorId - 1;
-                        bikeValues[index] = wgen;
-                        sumValues[index] += wgen;
-                        updateBoundValues(index);
+                        bikeValues[bikeIndex] = wgen;
+                        sumValues[bikeIndex] += wgen;
+                        updateBoundValues(bikeIndex);
                         bikeValues[5] = bikeValues[0] + bikeValues[1] + bikeValues[2] + bikeValues[3] + bikeValues[4];
                         sumValues[5] = sumValues[0] + sumValues[1] + sumValues[2] + sumValues[3] + sumValues[4];
                         updateBoundValues(5);
