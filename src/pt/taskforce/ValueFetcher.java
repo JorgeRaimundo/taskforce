@@ -56,6 +56,9 @@ public class ValueFetcher extends Task<Integer> {
             sumTotal
     };
 
+    private double[][] lastValues = new double[5][5];
+    private int[] currentLastValueIndeces = new int[] {0, 0, 0, 0, 0};
+
     private int baudRate;
     private int dataBits;
     private int stopBits;
@@ -66,6 +69,7 @@ public class ValueFetcher extends Task<Integer> {
     private String portString;
 
     private boolean loggingEnabled;
+    private String logFile;
     private final static Logger logger = Logger.getLogger(ValueFetcher.class.getName());
     private static FileHandler fh = null;
 
@@ -80,7 +84,7 @@ public class ValueFetcher extends Task<Integer> {
         this.comString = properties.getProperty("comString");
         this.portString = properties.getProperty("portString");
         loggingEnabled = Boolean.parseBoolean(properties.getProperty("app.logging"));
-        String logFile = properties.getProperty("app.logFile");
+        logFile = properties.getProperty("app.logFile");
 
         if (loggingEnabled) {
             try {
@@ -138,9 +142,11 @@ public class ValueFetcher extends Task<Integer> {
 
                     int bikeIndex = sensorId - 1;
 
+                    double avgLastValues = getAverageValue(bikeIndex, wgen);
+
                     try {
-                        bikeValues[bikeIndex] = wgen;
-                        sumValues[bikeIndex] += wgen;
+                        bikeValues[bikeIndex] = avgLastValues;
+                        sumValues[bikeIndex] += wgen / 5;
                         updateBoundValues(bikeIndex);
                         bikeValues[5] = bikeValues[0] + bikeValues[1] + bikeValues[2] + bikeValues[3] + bikeValues[4];
                         sumValues[5] = sumValues[0] + sumValues[1] + sumValues[2] + sumValues[3] + sumValues[4];
@@ -166,6 +172,14 @@ public class ValueFetcher extends Task<Integer> {
         return 1;
     }
 
+    private double getAverageValue(int bikeIndex, double wgen) {
+        int currentLastValueIndex = currentLastValueIndeces[bikeIndex];
+        lastValues[bikeIndex][currentLastValueIndex] = wgen;
+        currentLastValueIndeces[bikeIndex] = (++currentLastValueIndex) % 5;
+        double[] bikeLastValues = lastValues[bikeIndex];
+        return (bikeLastValues[0] + bikeLastValues[1] + bikeLastValues[2] + bikeLastValues[3] + bikeLastValues[4]) / 5;
+    }
+
     private SerialPort connect() {
         SerialPort comPort = null;
 
@@ -177,9 +191,9 @@ public class ValueFetcher extends Task<Integer> {
                 String systemPortName = comPortI.getSystemPortName();
                 String descriptivePortName = comPortI.getDescriptivePortName();
                 System.out.println(String.format(
-                    "Detected board: comString -> %s portString -> %s",
-                    systemPortName,
-                    descriptivePortName
+                        "Detected board: comString -> %s portString -> %s",
+                        systemPortName,
+                        descriptivePortName
                 ));
                 if (systemPortName.equals(comString) && descriptivePortName.equals(portString)) {
                     comPort = comPortI;
