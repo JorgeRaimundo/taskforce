@@ -4,9 +4,8 @@ import javafx.application.Platform;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.concurrent.Task;
 
-import java.io.BufferedReader;
-import java.io.FileReader;
-import java.io.IOException;
+import java.io.*;
+import java.nio.charset.Charset;
 import java.util.ArrayList;
 
 public class SentenceFetcher extends Task<Integer> {
@@ -27,7 +26,9 @@ public class SentenceFetcher extends Task<Integer> {
 
     private ArrayList<String> getMotivationalSentences() {
         ArrayList<String> motivationalSentences = new ArrayList<>();
-        try(BufferedReader br = new BufferedReader(new FileReader("frases.txt"))) {
+        try(BufferedReader br = new BufferedReader(new InputStreamReader(
+                                new FileInputStream("frases.txt"), "UTF-8")
+        )) {
             for(String line; (line = br.readLine()) != null; ) {
                 motivationalSentences.add(line);
             }
