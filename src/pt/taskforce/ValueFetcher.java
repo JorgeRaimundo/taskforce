@@ -146,7 +146,7 @@ public class ValueFetcher extends Task<Integer> {
 
                     try {
                         bikeValues[bikeIndex] = avgLastValues;
-                        sumValues[bikeIndex] += wgen / 5;
+                        sumValues[bikeIndex] += (wgen / 5) / 3600;
                         updateBoundValues(bikeIndex);
                         bikeValues[5] = bikeValues[0] + bikeValues[1] + bikeValues[2] + bikeValues[3] + bikeValues[4];
                         sumValues[5] = sumValues[0] + sumValues[1] + sumValues[2] + sumValues[3] + sumValues[4];

@@ -6,22 +6,33 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.geometry.Insets?>
 
+<?import javafx.scene.effect.DropShadow?>
 <GridPane fx:controller="pt.taskforce.Controller"
           stylesheets="/pt/taskforce/styles.css"
           xmlns:fx="http://javafx.com/fxml"
           alignment="center" hgap="25" vgap="25">
     <padding><Insets top="25" right="25" bottom="25" left="25"/></padding>
 
+
     <VBox GridPane.rowIndex ="1"  GridPane.columnIndex ="1" spacing="3" alignment="CENTER">
         <Rectangle width="200" height="3" arcWidth="6" arcHeight="6" fill="#4dd0e1"/>
         <Label alignment="CENTER" textFill="#4dd0e1">BICICLETA 1
             <padding><Insets bottom="10"/></padding>
+            <effect>
+                <DropShadow offsetY="3.0f" color="grey"/>
+            </effect>
         </Label>
         <Gauge GridPane.rowIndex="1" fx:id="gauge1" title="Bicicleta 1">
             <padding><Insets bottom="10"/></padding>
+            <effect>
+                <DropShadow offsetY="3.0f" color="grey"/>
+            </effect>
         </Gauge>
         <Label fx:id="label1" alignment="CENTER" textFill="#ffb74d" text="0 Wh">
             <padding><Insets bottom="10"/></padding>
+            <effect>
+                <DropShadow offsetY="3.0f" color="grey"/>
+            </effect>
         </Label>
     </VBox>
 
@@ -29,12 +40,21 @@
         <Rectangle width="200" height="3" arcWidth="6" arcHeight="6" fill="#ffb74d"/>
         <Label alignment="CENTER" textFill="#ffb74d">BICICLETA 2
             <padding><Insets bottom="10"/></padding>
+            <effect>
+                <DropShadow offsetY="3.0f" color="grey"/>
+            </effect>
         </Label>
         <Gauge GridPane.rowIndex="1" fx:id="gauge2" title="Bicicleta 2">
             <padding><Insets bottom="10"/></padding>
+            <effect>
+                <DropShadow offsetY="3.0f" color="grey"/>
+            </effect>
         </Gauge>
         <Label fx:id="label2" alignment="CENTER" textFill="#ffb74d" text="0 Wh">
             <padding><Insets bottom="10"/></padding>
+            <effect>
+                <DropShadow offsetY="3.0f" color="grey"/>
+            </effect>
         </Label>
     </VBox>
 
@@ -42,12 +62,21 @@
         <Rectangle width="200" height="3" arcWidth="6" arcHeight="6" fill="#81c784"/>
         <Label alignment="CENTER" textFill="#81c784">BICICLETA 3
             <padding><Insets bottom="10"/></padding>
+            <effect>
+                <DropShadow offsetY="3.0f" color="grey"/>
+            </effect>
         </Label>
         <Gauge GridPane.rowIndex="1" fx:id="gauge3" title="Bicicleta 3">
             <padding><Insets bottom="10"/></padding>
+            <effect>
+                <DropShadow offsetY="3.0f" color="grey"/>
+            </effect>
         </Gauge>
         <Label fx:id="label3" alignment="CENTER" textFill="#ffb74d" text="0 Wh">
             <padding><Insets bottom="10"/></padding>
+            <effect>
+                <DropShadow offsetY="3.0f" color="grey"/>
+            </effect>
         </Label>
     </VBox>
 
@@ -55,12 +84,21 @@
         <Rectangle width="200" height="3" arcWidth="6" arcHeight="6" fill="#9575cd"/>
         <Label alignment="CENTER" textFill="#9575cd">BICICLETA 4
             <padding><Insets bottom="10"/></padding>
+            <effect>
+                <DropShadow offsetY="3.0f" color="grey"/>
+            </effect>
         </Label>
         <Gauge GridPane.rowIndex="1" fx:id="gauge4" title="Bicicleta 4">
             <padding><Insets bottom="10"/></padding>
+            <effect>
+                <DropShadow offsetY="3.0f" color="grey"/>
+            </effect>
         </Gauge>
         <Label fx:id="label4" alignment="CENTER" textFill="#ffb74d" text="0 Wh">
             <padding><Insets bottom="10"/></padding>
+            <effect>
+                <DropShadow offsetY="3.0f" color="grey"/>
+            </effect>
         </Label>
     </VBox>
 
@@ -68,30 +106,64 @@
         <Rectangle width="200" height="3" arcWidth="6" arcHeight="6" fill="#e57373"/>
         <Label alignment="CENTER" textFill="#e57373">BICICLETA 5
             <padding><Insets bottom="10"/></padding>
+            <effect>
+                <DropShadow offsetY="3.0f" color="grey"/>
+            </effect>
         </Label>
         <Gauge GridPane.rowIndex="1" fx:id="gauge5" title="Bicicleta 5">
             <padding><Insets bottom="10"/></padding>
+            <effect>
+                <DropShadow offsetY="3.0f" color="grey"/>
+            </effect>
         </Gauge>
         <Label fx:id="label5" alignment="CENTER" textFill="#ffb74d" text="0 Wh">
             <padding><Insets bottom="10"/></padding>
+            <effect>
+                <DropShadow offsetY="3.0f" color="grey"/>
+            </effect>
         </Label>
     </VBox>
 
-    <Label fx:id="rxLabel" GridPane.rowIndex ="2" GridPane.columnIndex="1" alignment="CENTER"
+    <Label fx:id="rxLabel" GridPane.rowIndex ="2" GridPane.columnIndex="5" alignment="CENTER"
            textAlignment="CENTER" textFill="brown">Rx Disconnected
         <padding><Insets bottom="25"/></padding>
+        <effect>
+            <DropShadow offsetY="3.0f" color="grey"/>
+        </effect>
     </Label>
 
-    <VBox GridPane.rowIndex ="2"  GridPane.columnIndex="3" spacing="3" alignment="CENTER">
+    <VBox GridPane.rowIndex ="2"  GridPane.columnIndex="1" spacing="3" alignment="CENTER">
         <Rectangle width="200" height="3" arcWidth="6" arcHeight="6" fill="#AAAAAA"/>
         <Label alignment="CENTER" textFill="#AAAAAA">TOTAL
             <padding><Insets bottom="10"/></padding>
+            <effect>
+                <DropShadow offsetY="3.0f" color="grey"/>
+            </effect>
         </Label>
         <Gauge GridPane.rowIndex="1" fx:id="gaugeTotal" title="Total">
             <padding><Insets bottom="10"/></padding>
+            <effect>
+                <DropShadow offsetY="3.0f" color="grey"/>
+            </effect>
         </Gauge>
         <Label fx:id="labelTotal" alignment="CENTER" textFill="#AAAAAA" text="0 Wh">
             <padding><Insets bottom="10"/></padding>
+            <effect>
+                <DropShadow offsetY="3.0f" color="grey"/>
+            </effect>
         </Label>
     </VBox>
+
+    <Label fx:id="motivationLabel" GridPane.rowIndex ="2"  GridPane.columnIndex="3" GridPane.columnSpan="4"
+           alignment="TOP_CENTER" textFill="#AAAAAA" textAlignment="CENTER"
+           maxWidth="750" minHeight="300" wrapText="true">asdçlsadlsadçlsadçl
+        <effect>
+            <DropShadow offsetY="3.0f" color="grey"/>
+        </effect>
+    </Label>
+
+    <!--
+        <Rectangle GridPane.columnSpan="5" GridPane.rowSpan="2" fill="#00000033" width="1455" height="915"/>
+    -->
+
 </GridPane>
