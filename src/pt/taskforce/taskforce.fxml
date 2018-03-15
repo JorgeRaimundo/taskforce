@@ -174,7 +174,7 @@
         <effect>
             <DropShadow offsetY="3.0f" color="grey"/>
         </effect>
-        <Image url="file:src/pt/taskforce/exit_button.png" />
+        <Image url="file:exit_button.png" />
     </ImageView>
 
 </GridPane>
