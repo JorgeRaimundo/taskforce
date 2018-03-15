@@ -25,13 +25,22 @@ public class Main extends Application {
 
         primaryStage.setTitle("Taskforce");
         primaryStage.setScene(new Scene(root));
+        primaryStage.setFullScreen(true);
         primaryStage.show();
 
-        primaryStage.setOnCloseRequest(t -> {
-            ((Controller) fxmlLoader.getController()).stop();
-            Platform.exit();
-            System.exit(0);
+        primaryStage.setOnCloseRequest(t -> terminate());
+
+        primaryStage.getScene().setOnKeyPressed(event -> {
+            switch (event.getCode()) {
+                case Q: if (event.isControlDown()) {terminate();}
+            }
         });
+    }
+
+    private void terminate(){
+        stop();
+        Platform.exit();
+        System.exit(0);
     }
 
     @Override
