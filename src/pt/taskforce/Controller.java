@@ -1,10 +1,13 @@
 package pt.taskforce;
 
 import eu.hansolo.medusa.Gauge;
+import javafx.application.Platform;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
+import javafx.scene.image.ImageView;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.paint.Color;
 
 import java.net.URL;
@@ -42,6 +45,8 @@ public class Controller implements Initializable{
     public Label label5;
     @FXML
     public Label labelTotal;
+    @FXML
+    public ImageView exitButton;
 
     private ValueFetcher valueFetcher;
     private SentenceFetcher sentenceFetcher;
@@ -91,6 +96,13 @@ public class Controller implements Initializable{
         styleGauge(gaugeTotal, Color.rgb(255,255,255), totalGaugeConfiguration);
 
         labelTotal.textProperty().bind(valueFetcher.sumTotal.asString("%.2f Wh"));
+
+        EventHandler<? super MouseEvent> eventHandler = event -> {
+            stop();
+            Platform.exit();
+            System.exit(0);
+        };
+        exitButton.setOnMouseClicked(eventHandler);
 
         new Thread(valueFetcher).start();
         new Thread(sentenceFetcher).start();

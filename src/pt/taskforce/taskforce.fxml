@@ -7,6 +7,9 @@
 <?import javafx.geometry.Insets?>
 
 <?import javafx.scene.effect.DropShadow?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.image.Image?>
+
 <GridPane fx:controller="pt.taskforce.Controller"
           stylesheets="/pt/taskforce/styles.css"
           xmlns:fx="http://javafx.com/fxml"
@@ -156,7 +159,7 @@
 
     <Label fx:id="motivationLabel" GridPane.rowIndex ="2"  GridPane.columnIndex="3" GridPane.columnSpan="4"
            alignment="TOP_CENTER" textFill="#AAAAAA" textAlignment="CENTER"
-           maxWidth="750" minHeight="300" wrapText="true">asdçlsadlsadçlsadçl
+           maxWidth="750" minHeight="300" wrapText="true">
         <effect>
             <DropShadow offsetY="3.0f" color="grey"/>
         </effect>
@@ -165,5 +168,13 @@
     <!--
         <Rectangle GridPane.columnSpan="5" GridPane.rowSpan="2" fill="#00000033" width="1455" height="915"/>
     -->
+
+    <ImageView fx:id="exitButton" GridPane.rowIndex="3" GridPane.columnIndex="0"
+               GridPane.halignment="LEFT" GridPane.valignment="BOTTOM" opacity="0.25">
+        <effect>
+            <DropShadow offsetY="3.0f" color="grey"/>
+        </effect>
+        <Image url="file:src/pt/taskforce/exit_button.png" />
+    </ImageView>
 
 </GridPane>
