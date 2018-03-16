@@ -23,7 +23,7 @@ public class Main extends Application {
         fxmlLoader.setBuilderFactory(new JavaFXBuilderFactory());
         Parent root = fxmlLoader.load(location.openStream());
 
-        primaryStage.setTitle("Taskforce");
+        primaryStage.setTitle("ADP - Energia a pedais");
         primaryStage.setScene(new Scene(root));
         primaryStage.setFullScreen(true);
         primaryStage.show();
