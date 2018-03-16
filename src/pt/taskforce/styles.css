@@ -4,7 +4,7 @@
     -fx-background-size: stretch;
 }
 .label {
-    -fx-font-size: 36;
+    -fx-font-size: 42;
     -fx-text-fill: #272c32;
 }
 .text { -fx-font-smoothing-type: lcd; }
