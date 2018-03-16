@@ -91,12 +91,11 @@ public class ValueFetcher extends Task<Integer> {
                 fh = new FileHandler(logFile, false);
                 MyFormatter formatter = new MyFormatter();
                 fh.setFormatter(formatter);
+                logger.addHandler(fh);
+                logger.setLevel(Level.CONFIG);
             } catch (SecurityException | IOException e) {
                 e.printStackTrace();
             }
-            fh.setFormatter(new SimpleFormatter());
-            logger.addHandler(fh);
-            logger.setLevel(Level.CONFIG);
         }
     }
 
@@ -199,28 +198,37 @@ public class ValueFetcher extends Task<Integer> {
                 ));
                 if (systemPortName.equals(comString) && descriptivePortName.equals(portString)) {
                     comPort = comPortI;
-                    break;
+                    if (!openPort(comPort)) {
+                        comPort = null;
+                    }
                 }
             }
 
-            log("Could not find Rx");
+            if (comPort == null) {
+                log("Could not find/connect Rx");
+            }
         }
 
-        log("Rx Connected");
-        rxMissing.set(false);
+        return comPort;
+    }
 
+    private boolean openPort(SerialPort comPort) {
+        if (!comPort.openPort()) {
+            log("Could not open the comPort!");
+            return false;
+        }
         comPort.setBaudRate(baudRate);
         comPort.setNumDataBits(dataBits);
         comPort.setNumStopBits(stopBits);
         comPort.setParity(parity);
         comPort.setFlowControl(hwFlowCtrl);
 
-        return comPort;
+        log("Rx Connected");
+        rxMissing.set(false);
+        return true;
     }
 
     private InputStream getInputStream(SerialPort comPort) {
-        comPort.openPort();
-
         // Input/Output Stream
         comPort.setComPortTimeouts(SerialPort.TIMEOUT_READ_SEMI_BLOCKING, NEW_READ_TIMEOUT, NEW_WRITE_TIMEOUT);
 
@@ -292,7 +300,7 @@ public class ValueFetcher extends Task<Integer> {
 
 class MyFormatter extends Formatter {
     // Create a DateFormat to format the logger timestamp.
-    private static final DateFormat df = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
+    private static final DateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 
     public String format(LogRecord record) {
         StringBuilder builder = new StringBuilder(1000);
