@@ -13,13 +13,13 @@
 <GridPane fx:controller="pt.taskforce.Controller"
           stylesheets="/pt/taskforce/styles.css"
           xmlns:fx="http://javafx.com/fxml"
-          alignment="center" hgap="25" vgap="25">
+          alignment="center" hgap="100" vgap="30"> <!-- gridLinesVisible="true"> -->
     <padding><Insets top="25" right="25" bottom="25" left="25"/></padding>
 
 
     <VBox GridPane.rowIndex ="1"  GridPane.columnIndex ="1" spacing="3" alignment="CENTER">
         <Rectangle width="200" height="3" arcWidth="6" arcHeight="6" fill="#4dd0e1"/>
-        <Label alignment="CENTER" textFill="#4dd0e1">BICICLETA 1
+        <Label alignment="CENTER" textFill="#4dd0e1">1
             <padding><Insets bottom="10"/></padding>
             <effect>
                 <DropShadow offsetY="3.0f" color="grey"/>
@@ -41,7 +41,7 @@
 
     <VBox GridPane.rowIndex ="1"  GridPane.columnIndex="2" spacing="3" alignment="CENTER">
         <Rectangle width="200" height="3" arcWidth="6" arcHeight="6" fill="#ffb74d"/>
-        <Label alignment="CENTER" textFill="#ffb74d">BICICLETA 2
+        <Label alignment="CENTER" textFill="#ffb74d">2
             <padding><Insets bottom="10"/></padding>
             <effect>
                 <DropShadow offsetY="3.0f" color="grey"/>
@@ -63,7 +63,7 @@
 
     <VBox GridPane.rowIndex ="1"  GridPane.columnIndex="3" spacing="3" alignment="CENTER">
         <Rectangle width="200" height="3" arcWidth="6" arcHeight="6" fill="#81c784"/>
-        <Label alignment="CENTER" textFill="#81c784">BICICLETA 3
+        <Label alignment="CENTER" textFill="#81c784">3
             <padding><Insets bottom="10"/></padding>
             <effect>
                 <DropShadow offsetY="3.0f" color="grey"/>
@@ -85,7 +85,7 @@
 
     <VBox GridPane.rowIndex ="1"  GridPane.columnIndex="4" spacing="3" alignment="CENTER">
         <Rectangle width="200" height="3" arcWidth="6" arcHeight="6" fill="#9575cd"/>
-        <Label alignment="CENTER" textFill="#9575cd">BICICLETA 4
+        <Label alignment="CENTER" textFill="#9575cd">4
             <padding><Insets bottom="10"/></padding>
             <effect>
                 <DropShadow offsetY="3.0f" color="grey"/>
@@ -107,7 +107,7 @@
 
     <VBox GridPane.rowIndex ="1"  GridPane.columnIndex="5" spacing="3" alignment="CENTER">
         <Rectangle width="200" height="3" arcWidth="6" arcHeight="6" fill="#e57373"/>
-        <Label alignment="CENTER" textFill="#e57373">BICICLETA 5
+        <Label alignment="CENTER" textFill="#e57373">5
             <padding><Insets bottom="10"/></padding>
             <effect>
                 <DropShadow offsetY="3.0f" color="grey"/>
@@ -127,8 +127,9 @@
         </Label>
     </VBox>
 
-    <Label fx:id="rxLabel" GridPane.rowIndex ="2" GridPane.columnIndex="5" alignment="CENTER"
-           textAlignment="CENTER" textFill="brown">Rx Disconnected
+    <Label fx:id="rxLabel" GridPane.rowIndex ="2" alignment="CENTER" GridPane.columnIndex="3" GridPane.columnSpan="4"
+           textFill="#AAAAAA" textAlignment="CENTER"
+           maxWidth="750" minHeight="300" wrapText="true">Rx Disconnected
         <padding><Insets bottom="25"/></padding>
         <effect>
             <DropShadow offsetY="3.0f" color="grey"/>
@@ -165,11 +166,7 @@
         </effect>
     </Label>
 
-    <!--
-        <Rectangle GridPane.columnSpan="5" GridPane.rowSpan="2" fill="#00000033" width="1455" height="915"/>
-    -->
-
-    <ImageView fx:id="exitButton" GridPane.rowIndex="3" GridPane.columnIndex="0"
+    <ImageView fx:id="exitButton" GridPane.rowIndex="3" GridPane.columnIndex="1"
                GridPane.halignment="LEFT" GridPane.valignment="BOTTOM" opacity="0.25">
         <effect>
             <DropShadow offsetY="3.0f" color="grey"/>

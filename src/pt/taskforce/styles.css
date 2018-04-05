@@ -3,8 +3,13 @@
     -fx-background-image: url("fundo.jpg");
     -fx-background-size: stretch;
 }
+
 .label {
     -fx-font-size: 42;
     -fx-text-fill: #272c32;
+    -fx-font-family: "Gill Sans MT";
 }
-.text { -fx-font-smoothing-type: lcd; }
+.text {
+    -fx-font-smoothing-type: lcd;
+    -fx-font-family: "Gill Sans MT";
+}
