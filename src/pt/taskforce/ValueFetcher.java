@@ -108,7 +108,7 @@ public class ValueFetcher extends Task<Integer> {
             InputStream in = getInputStream(comPort);
 
             try {
-                log("Network id\tSensor id\tVgen\tIgen\tWgen\n");
+                log("Network id\tSensor id\tVgen\tIgen\tWgen");
 
                 while (!exit) {
                     int networkId = (byte) in.read();
@@ -135,7 +135,7 @@ public class ValueFetcher extends Task<Integer> {
 
                     double wgen = vgen * igen;
 
-                    log(String.format("%d\t%d\t%f\t%f\t%f\n", networkId, sensorId, vgen, igen, wgen));
+                    log(String.format("%d\t%d\t%f\t%f\t%f", networkId, sensorId, vgen, igen, wgen));
 
                     if (wgen < 0.4) { // wgen < 0.4 is just noise
                         wgen = 0;
@@ -154,7 +154,7 @@ public class ValueFetcher extends Task<Integer> {
                         updateBoundValues(5);
                     } catch (Exception e) {
                         log(String.format(
-                                "Failed: %d\t%d\t%f\t%f\t%f\n", networkId, sensorId, vgen, igen, wgen) + e.getMessage()
+                                "Failed: %d\t%d\t%f\t%f\t%f", networkId, sensorId, vgen, igen, wgen) + e.getMessage()
                         );
                     }
 
